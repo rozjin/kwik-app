@@ -1,8 +1,8 @@
 const withPWA = require('@imbios/next-pwa');
-const runtimeCaching = require('@imbios/next-pwa/cache');
+const isProd = process.env.NODE_ENV === 'production';
 
 /** @type {import('next').NextConfig} */
-const config = {
+const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
     images: {
@@ -10,9 +10,10 @@ const config = {
     }
 };
 
-const nextConfig = withPWA({
-    dest: 'public',
-    runtimeCaching
-})(config);
+module.exports = withPWA({
+    disable: !isProd,
 
-module.exports = nextConfig;
+    dest: 'public',
+    register: true,
+    skipWaiting: true
+})(nextConfig);

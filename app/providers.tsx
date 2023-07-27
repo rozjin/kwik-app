@@ -1,7 +1,6 @@
 'use client'
 
 import { NextUIProvider } from '@nextui-org/react';
-import dynamic from 'next/dynamic';
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -11,6 +10,4 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
   )
 }
  
-export default dynamic(() => Promise.resolve(Providers), {
-  ssr: false
-});
+export default Providers;

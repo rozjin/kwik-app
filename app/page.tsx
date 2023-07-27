@@ -28,15 +28,11 @@ export default () => {
           </CardHeader>
           <Divider />
           <CardBody className="gap-4">
-            <Button color="primary">
-              <Link href="/auth/login/fresh" style={{
-                textDecoration: 'none'
-              }}>Login</Link>
+            <Button color="primary" onPress={() => router.push('/auth/login/fresh')}>
+              Login
             </Button>
-            <Button color="primary">
-              <Link href="/auth/create" style={{
-                textDecoration: 'none'
-              }}>Sign Up</Link>
+            <Button color="primary" onPress={() => router.push('/auth/create')}>
+              Sign Up
             </Button>
           </CardBody>
           <Divider />

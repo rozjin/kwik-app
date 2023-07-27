@@ -1,4 +1,3 @@
-import { NextRequest } from 'next/server';
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 

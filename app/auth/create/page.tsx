@@ -123,7 +123,7 @@ export default () => {
           )}
         />
 
-        <Button color="primary" onPress={() => handleSubmit(onSubmit)}>Continue</Button>
+        <Button color="primary" onClick={handleSubmit(onSubmit)}>Continue</Button>
 
         <div className="flex flex-row">
           <span className="mr-2 text-sm">Have an account?</span>

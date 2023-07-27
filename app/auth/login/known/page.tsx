@@ -85,7 +85,7 @@ export default () => {
 
         <Link href="#" className="text-sm">Forgot password?</Link>
 
-        <Button color="primary" onPress={() => handleSubmit(onSubmit)}>Continue</Button>
+        <Button color="primary" onClick={handleSubmit(onSubmit)}>Continue</Button>
         <div className="flex flex-row">
           <span className="mr-2 text-sm">Don&apos;t have an account?</span>
           <Link href="/auth/create" className="text-sm">Sign up</Link>

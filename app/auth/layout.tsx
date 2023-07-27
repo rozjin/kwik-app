@@ -1,7 +1,7 @@
 'use client'
 
 import { Navbar, NavbarBrand, NavbarContent } from "@nextui-org/react";
-import { useMemo } from "react";
+import { useEffect } from "react";
 import useUser from "@/kwik/hooks/user";
 import { useRouter } from "next/navigation";
 
@@ -10,7 +10,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   
   const router = useRouter();
 
-  useMemo(() => {
+  useEffect(() => {
     if (user.data.refreshToken != '') {
         if (user.data.token == '') user.refresh();
         router.push('/app');

@@ -323,7 +323,7 @@ export default () => {
         color="primary"
         variant="flat"
 
-        onPress={() => handleSubmit(onSubmit)}
+        onClick={handleSubmit(onSubmit)}
       >Save</Button>
    </>
   )
