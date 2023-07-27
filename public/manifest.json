@@ -1,49 +1,73 @@
 {
-"name": "Kwik Payments",
-"short_name": "Kwik",
-"start_url": "https://app.moirai.nz",
-"display": "standalone",
-"display_override": ["fullscreen", "minimal-ui"],
-"description": "Kwik: Pay people faster",
-"lang": "en",
-"dir": "auto",
-"theme_color": "#000000",
-"background_color": "#000000",
-"orientation": "any",
-"icons": [
-    {
-        "src": "https://www.pwabuilder.com/assets/icons/icon_512.png",
-        "sizes": "512x512",
-        "type": "image/png",
-        "purpose": "maskable"
+    "id": "kwik_payments",
+    "name": "Kwik Payments",
+    "short_name": "Kwik",
+    "categoies": ["finance", "banking"],
+
+    "start_url": "https://app.moirai.nz",
+    "scope": "https://app.moirai.nz",
+
+    "display": "standalone",
+    "display_override": ["fullscreen", "minimal-ui"],
+    "description": "Kwik: Pay people faster",
+    
+    "lang": "en",
+    "dir": "auto",
+    
+    "theme_color": "#000000",
+    "background_color": "#000000",
+    "orientation": "any",
+    
+    "icons": [
+        {
+            "src": "https://www.pwabuilder.com/assets/icons/icon_512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "https://www.pwabuilder.com/assets/icons/icon_192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "https://www.pwabuilder.com/assets/screenshots/screen1.png",
+            "sizes": "2880x1800",
+            "type": "image/png",
+            "description": "A screenshot of thpe home page"
+        }
+    ],
+    "related_applications": [
+        {
+            "platform": "windows",
+            "url": " The URL to your app in that app store"
+        }
+    ],
+
+    "prefer_related_applications": false,
+    "shortcuts": [
+        {
+            "name": "Kwik Balance",
+            "url": "https://app.moirai.nz/app",
+            "description": "View your Kwik balance"
+        }
+    ],
+    "handle_links": "preferred",
+    "edge_side_panel": {
+        "preferred_width": 400
     },
-    {
-        "src": "https://www.pwabuilder.com/assets/icons/icon_192.png",
-        "sizes": "192x192",
-        "type": "image/png",
-        "purpose": "any"
-    }
-],
-"screenshots": [
-    {
-        "src": "https://www.pwabuilder.com/assets/screenshots/screen1.png",
-        "sizes": "2880x1800",
-        "type": "image/png",
-        "description": "A screenshot of the home page"
-    }
-],
-"related_applications": [
-    {
-        "platform": "windows",
-        "url": " The URL to your app in that app store"
-    }
-],
-"prefer_related_applications": false,
-"shortcuts": [
-    {
-        "name": "Kwik Balance",
-        "url": "https://app.moirai.nz/app",
-        "description": "View your Kwik balance"
-    }
-]
+
+    "launch_handler": {
+        "client_mode": ["focus-existing", "navigate-existing", "auto"]
+    },
+
+    "protocol_handlers": [
+        {
+            "protocol": "kwik",
+            "url": "%s" 
+        }
+    ]
 }
