@@ -1,7 +1,7 @@
 {
     "name": "Kwik",
     "short_name": "This name will show in your Windows taskbar, in the start menu, and Android homescreen",
-    "start_url": "http://localhost:3000",
+    "start_url": "https://app.moirai.nz",
 
     "display_override": ["fullscreen", "minimal-ui"],
     "display": "fullscreen",
