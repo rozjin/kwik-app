@@ -1,0 +1,120 @@
+'use client'
+
+import { Card, CardHeader, CardBody, Divider, Dropdown, DropdownTrigger, Button, DropdownMenu, DropdownItem, Table, TableHeader, TableColumn, TableBody, TableRow, Skeleton, CardFooter, TableCell } from "@nextui-org/react";
+import { MenuIcon } from '@heroicons/react/outline';
+import { ArrowRightIcon } from '@heroicons/react/solid';
+import { default as useUser } from '@/kwik/hooks/user';
+import fetcher, { FetchError } from "@/kwik/app/fetcher";
+import useSWR from 'swr';
+import Link from "next/link";
+
+export default () => {
+  const user = useUser();
+  const { data, isLoading, error } = useSWR(['/api/money', {
+    headers: {
+      'Authorization': `Bearer ${user.data.token}`
+    }
+  }], ([input, init]) => fetcher(input, init), {
+    onErrorRetry: async(err, key, config, revalidate, { retryCount }) => {
+      if (err instanceof FetchError && err.status == 401) {
+        await user.refresh();
+
+        setTimeout(() => revalidate({ retryCount }), 1500);
+      }
+    },
+  });
+
+  if (isLoading) return (
+    <>
+      <Card className="gap-4 p-6">
+        <Skeleton className="rounded-lg">
+          <div className="rounded-lg h-14 bg-default-300"></div>
+        </Skeleton>
+        <Skeleton className="rounded-lg">
+          <div className="h-20 rounded-lg bg-default-300"></div>
+        </Skeleton>
+        <Skeleton className="rounded-lg">
+          <div className="h-10 rounded-lg bg-default-300"></div>
+        </Skeleton>
+      </Card>
+      <Table aria-label="Transactions table" className="mt-4">
+        <TableHeader>
+          <TableColumn>Date</TableColumn>
+          <TableColumn>Amount</TableColumn>
+          <TableColumn>Balance</TableColumn>
+          <TableColumn>Status</TableColumn>
+        </TableHeader>
+        <TableBody emptyContent={
+            <Skeleton className="rounded-lg">
+              <div className="rounded-lg h-36 bg-default-300"></div>
+            </Skeleton>
+          }
+        >
+        </TableBody>
+      </Table>
+    </>
+  )
+
+  return (
+    <>
+      <Card className="p-6">
+        <CardHeader className="justify-between p-0 m-0 mb-1">
+            <h4 className="text-lg font-bold">Kwik Balance</h4>
+            <Dropdown>
+              <DropdownTrigger>
+                <Button
+                  isIconOnly
+                  className="p-2 text-white"
+                  >
+                    <MenuIcon />
+                  </Button>
+              </DropdownTrigger>
+
+              <DropdownMenu aria-label="Balance Menu">
+                <DropdownItem key="wallet-link" className="text-primary" color="primary">
+                  <Link href='/app/wallet' style={{
+                    textDecoration: 'none'
+                  }}>Go to Wallet</Link>
+                </DropdownItem>
+                <DropdownItem key="help">Help</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+        </CardHeader>
+        <CardBody className="p-0 m-0 overflow-visible">
+          <div className="text-4xl">
+            <span>$</span>
+            <span>{data.data.balance}</span>
+          </div>
+        </CardBody>
+        <CardFooter className="relative justify-between px-0 pb-0 mt-1.5">
+          <span>Available</span>
+          <Button
+            color="primary"
+            variant="flat"
+            endContent={<ArrowRightIcon className="w-4 h-4" />}
+          >Add Funds</Button>
+        </CardFooter>
+      </Card>
+        { /*
+          accepted Boolean @default(false)
+
+    currency String @db.VarChar(3)
+    amount Float
+    last_balance Float
+
+    desc String @db.Text
+    date DateTime @default(now())
+
+        */ }
+      <Table aria-label="Transactions table" className="mt-4">
+        <TableHeader>
+          <TableColumn>Date</TableColumn>
+          <TableColumn>Amount</TableColumn>
+          <TableColumn>Balance</TableColumn>
+          <TableColumn>Status</TableColumn>
+        </TableHeader>
+        <TableBody emptyContent={"No transactions to display"}>{[]}</TableBody>
+      </Table>
+    </>
+  )
+}
