@@ -1,4 +1,6 @@
 const withPWA = require('@imbios/next-pwa');
+const runtimeCaching = require('next-pwa/cache')
+
 const isProd = process.env.NODE_ENV === 'production';
 
 /** @type {import('next').NextConfig} */
@@ -14,6 +16,9 @@ module.exports = withPWA({
     disable: !isProd,
 
     dest: 'public',
+    runtimeCaching,
     register: true,
-    skipWaiting: true
+    skipWaiting: true,
+
+    dynamicStartUrl: false
 })(nextConfig);
