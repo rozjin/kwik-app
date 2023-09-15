@@ -22,6 +22,7 @@ export default ({error, reset}: {error: Error, reset: () => void}) => {
           </Button>
         </div>
         <p className="mt-4">Something went wrong, please try again later.</p>
+        {error.message && <p className="mt-4">Message: {error.message}</p>}
 
         <Divider orientation="horizontal" className="my-2" />
         <span className="text-sm text-default-400">If you seek support, please mention this ID: {error.message}</span>
