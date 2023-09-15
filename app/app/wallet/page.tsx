@@ -1,7 +1,6 @@
 'use client'
 
 import { Card, CardHeader, CardBody, Divider, Dropdown, DropdownTrigger, Button, DropdownMenu, DropdownItem, Table, TableHeader, TableColumn, TableBody, TableRow, Skeleton, CardFooter, TableCell, card } from "@nextui-org/react";
-import { MenuIcon } from '@heroicons/react/outline';
 import { ArrowRightIcon, PlusIcon } from '@heroicons/react/solid';
 import { default as useUser } from '@/kwik/hooks/user';
 import fetcher, { FetchError } from "@/kwik/app/fetcher";
@@ -9,9 +8,7 @@ import useSWR from 'swr';
 import { useRouter } from "next/navigation";
 import PaymentCardIcon from '@/kwik/components/PaymentCardIcon';
 import { FastAverageColor } from 'fast-average-color';
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { string } from "zod";
-import Image from "next/image";
+import React, { useCallback, useState } from "react";
 import PartnerIcon from "@/kwik/components/PartnerIcon";
 
 type StripeCard = {
@@ -35,7 +32,7 @@ const PaymentCard = ({ card } : { card: StripeCard }) => {
   }, []);
 
   return (
-    <Card className="gap-4 p-0 mb-6" key={card.expiry}>
+    <Card className="max-w-sm gap-4 p-0 mb-6" key={card.expiry}>
       <div className="flex flex-col justify-between h-48 rounded-lg" style={{
         backgroundColor: cardColor
       }}>
@@ -76,13 +73,13 @@ export default () => {
       if (err instanceof FetchError && err.status == 401) {
         await user.refresh();
 
-        setTimeout(() => revalidate({ retryCount }), 1500);
+        revalidate({ retryCount });
       }
     },
   });
 
   const onSubmit = async() => {
-    const req = await fetch('https://api.moirai.nz/api/cards', {
+    const req = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/cards`, {
       method: 'POST',
       body: JSON.stringify({
         "op": "new"
@@ -136,7 +133,7 @@ export default () => {
           <div className="flex items-center justify-center h-32 rounded-lg">
             <span>You have no cards setup.</span>
           </div>
-          <Button variant="flat" color="primary" className="w-full justfiy-center" onPress={onSubmit}>
+          <Button variant="flat" color="primary" className="justify-center w-full" onPress={onSubmit}>
             <div className="flex flex-row items-center justify-start">
               <span>Add Card</span>
               <span><ArrowRightIcon className="w-4 h-4" /></span>

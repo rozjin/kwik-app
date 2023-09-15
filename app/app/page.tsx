@@ -19,7 +19,7 @@ export default () => {
       if (err instanceof FetchError && err.status == 401) {
         await user.refresh();
 
-        setTimeout(() => revalidate({ retryCount }), 1500);
+        revalidate({ retryCount });
       }
     },
   });
@@ -64,8 +64,10 @@ export default () => {
               <DropdownTrigger>
                 <Button
                   isIconOnly
-                  className="p-2 text-white"
-                  >
+                  className="p-2"
+                  color="primary"
+                  variant="flat"
+                >
                     <MenuIcon />
                   </Button>
               </DropdownTrigger>
@@ -92,7 +94,11 @@ export default () => {
             color="primary"
             variant="flat"
             endContent={<ArrowRightIcon className="w-4 h-4" />}
-          >Add Funds</Button>
+          >
+            <Link href='/app/wallet' style={{
+              textDecoration: 'none'
+            }}>Add Funds</Link>            
+          </Button>
         </CardFooter>
       </Card>
         { /*

@@ -51,17 +51,17 @@ const useUser = create<UserState>()(persist((set, get) => ({
 
     refresh: async() => {
         const { refreshToken } = get().data;
-        const req = await fetch('https://api.moirai.nz/auth/refresh', {
+        const req = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`, {
             method: 'POST',
             body: JSON.stringify({
                 refreshToken
             }),
-      
+    
             headers: {
-              'Content-Type': 'application/json'
+            'Content-Type': 'application/json'
             }
         })
-      
+    
         const res = await req.json()
         if (res.status == "success") {
             const token = res.data.token;
@@ -76,6 +76,6 @@ const useUser = create<UserState>()(persist((set, get) => ({
     },
 
     clear: () => set(initialState)
-}), { name: "user-storage", storage: createJSONStorage(() => localStorage) }));
+}), { name: "user-storage", storage: createJSONStorage(() => localStorage) }))
 
 export default useUser;

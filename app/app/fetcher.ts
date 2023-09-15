@@ -10,7 +10,7 @@ class FetchError extends Error {
     }
 }
 
-const url = 'https://api.moirai.nz';
+const url = 'http://localhost:5000';
 const fetcher = async<JSON = any>(
     input: RequestInfo,
     init?: RequestInit

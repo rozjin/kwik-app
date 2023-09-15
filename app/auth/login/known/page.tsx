@@ -22,7 +22,7 @@ export default () => {
     mode: "onSubmit"
   });
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
-    const req = await fetch('https://api.moirai.nz/auth/login', {
+    const req = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
       method: 'POST',
       body: JSON.stringify(data),
 

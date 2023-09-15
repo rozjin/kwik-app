@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuItem, NavbarMenu, NavbarMenuToggle, Link, Button } from "@nextui-org/react";
 import { usePathname, useRouter } from 'next/navigation';
 import useUser from '@/kwik/hooks/user';
+import dynamic from 'next/dynamic';
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const [isMenuOpen, setMenuOpen] = useState<boolean | undefined>(false);
@@ -21,7 +22,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
 
   const onSubmit = async() => {
-    const req = await fetch('https://api.moirai.nz/auth/logout', {
+    const req = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
       method: 'POST',
       body: JSON.stringify({
         refreshToken: user.data.refreshToken
@@ -121,4 +122,6 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-export default AppLayout;
+export default dynamic(() => Promise.resolve(AppLayout), {
+  ssr: false
+});

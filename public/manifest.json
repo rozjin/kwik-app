@@ -4,8 +4,8 @@
     "short_name": "Kwik",
     "categoies": ["finance", "banking"],
 
-    "start_url": "https://app.moirai.nz",
-    "scope": "https://app.moirai.nz",
+    "start_url": "http://localhost:3000",
+    "scope": "http://localhost:3000",
 
     "display": "standalone",
     "display_override": ["fullscreen", "minimal-ui"],
@@ -45,7 +45,7 @@
     "shortcuts": [
         {
             "name": "Kwik Balance",
-            "url": "https://app.moirai.nz/app",
+            "url": "http://localhost:3000/app",
             "description": "View your Kwik balance"
         }
     ],

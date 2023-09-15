@@ -1,12 +1,13 @@
 'use client'
 
 import GoogleLogoDark from "@/kwik/components/GoogleLogoDark"
-import { Button, Card, CardBody, CardFooter, CardHeader, Divider, Input, Link } from "@nextui-org/react"
+import { Button, Card, CardBody, CardFooter, CardHeader, Divider, Input, Link, Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/react"
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import validator from 'validator';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { CheckCircleIcon, XIcon } from "@heroicons/react/outline";
 
 type RegisterInputs = {
   name: string,
@@ -23,12 +24,18 @@ const RegisterSchema = z.object({
 })
 
 export default () => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [createResponse, setCreateResponse] = useState({
+    success: false,
+    message: ""
+  });
+
   const { control, handleSubmit } = useForm<RegisterInputs>({
     resolver: zodResolver(RegisterSchema),
     mode: "onSubmit"
   });
   const onSubmit: SubmitHandler<RegisterInputs> = async (data) => {
-    await fetch('https://api.moirai.nz/auth/create', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/create`, {
       method: 'POST',
       body: JSON.stringify(data),
 
@@ -36,6 +43,21 @@ export default () => {
         'Content-Type': 'application/json'
       }
     })
+
+    const createRes = await res.json();
+    if (!res.ok) {
+      setCreateResponse({
+        success: false,
+        message: "Hm, something went wrong. Please try again later."
+      })
+    } else {
+      setCreateResponse({
+        success: true,
+        message: createRes.data.message
+      })
+    }
+
+    onOpen();
   }
 
   return (
@@ -59,13 +81,31 @@ export default () => {
 
               onChange={onChange}
               value={value}
-              
+
               validationState={invalid ? "invalid" : "valid"}
               errorMessage={invalid && "Please enter your name"}
             />
           )}
         />
 
+        <Modal 
+          isOpen={isOpen} 
+          onOpenChange={onOpenChange}
+        >
+          <ModalContent>
+            <ModalBody>
+              <div className="flex flex-row text-lg items-center justify-center p-2">
+                <span className="mr-4">
+                  {createResponse.success ? 
+                    <CheckCircleIcon className="w-8 h-8 text-success" /> :
+                    <XIcon className="w-8 h-8 text-danger" /> 
+                  }
+                </span>
+                <span>{createResponse.message}</span>
+              </div>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
         <Controller
           name="email" control={control} defaultValue=""
           render={({ field: { onChange, value }, fieldState: { invalid } }) => (
@@ -78,7 +118,7 @@ export default () => {
 
               onChange={onChange}
               value={value}
-              
+
               validationState={invalid ? "invalid" : "valid"}
               errorMessage={invalid && "Please enter a valid email address"}
             />
@@ -97,7 +137,7 @@ export default () => {
 
               onChange={onChange}
               value={value}
-              
+
               validationState={invalid ? "invalid" : "valid"}
               errorMessage={invalid && "Please enter a valid NZ phone number"}
             />
@@ -116,7 +156,7 @@ export default () => {
 
               onChange={onChange}
               value={value}
-              
+
               validationState={invalid ? "invalid" : "valid"}
               errorMessage={invalid && "Please enter a password"}
             />
