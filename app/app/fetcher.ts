@@ -1,3 +1,5 @@
+'use client'
+
 class FetchError extends Error {
     message: string;
     status: number;
@@ -10,7 +12,7 @@ class FetchError extends Error {
     }
 }
 
-const url = 'http://localhost:5000';
+const url = process.env.NEXT_PUBLIC_API_URL;
 const fetcher = async<JSON = any>(
     input: RequestInfo,
     init?: RequestInit
