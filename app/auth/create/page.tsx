@@ -167,7 +167,7 @@ export default () => {
 
         <div className="flex flex-row">
           <span className="mr-2 text-sm">Have an account?</span>
-          <Link href="/auth/login/fresh" className="text-sm">Sign in</Link>
+          <Link href="/auth/login" className="text-sm">Sign in</Link>
         </div>
       </CardBody>
       <Divider />

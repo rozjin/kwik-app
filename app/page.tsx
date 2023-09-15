@@ -28,7 +28,7 @@ export default () => {
           </CardHeader>
           <Divider />
           <CardBody className="gap-4">
-            <Button color="primary" onPress={() => router.push('/auth/login/fresh')}>
+            <Button color="primary" onPress={() => router.push('/auth/login')}>
               Login
             </Button>
             <Button color="primary" onPress={() => router.push('/auth/create')}>

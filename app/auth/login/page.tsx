@@ -4,10 +4,11 @@ import { useRouter } from 'next/navigation'
 
 import GoogleLogoDark from "@/kwik/components/GoogleLogoDark"
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Card, CardBody, CardFooter, CardHeader, Divider, Input, Link } from "@nextui-org/react"
+import { Button, Card, CardBody, CardFooter, CardHeader, Divider, Input, Link, Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/react"
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { default as useUser } from '@/kwik/hooks/user';
+import { XIcon } from '@heroicons/react/outline';
 
 type LoginInputs = {
   email: string,
@@ -20,6 +21,8 @@ const LoginSchema = z.object({
 })
 
 export default () => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const user = useUser();
   const router = useRouter();
   const { control, handleSubmit } = useForm<LoginInputs>({
@@ -40,6 +43,8 @@ export default () => {
     if (res.status == "success") {
       user.create(res.data.user, res.data.refreshToken, res.data.token);
       router.push('/app');
+    } else {
+      onOpen();
     }
   }
 
@@ -51,6 +56,19 @@ export default () => {
       </CardHeader>
       <Divider />
       <CardBody className="gap-4">
+        <Modal 
+          isOpen={isOpen} 
+          onOpenChange={onOpenChange}
+        >
+          <ModalContent>
+            <ModalBody>
+              <div className="flex flex-row text-lg items-center justify-center p-2">
+                <span className="mr-4"><XIcon className="w-8 h-8 text-danger" /></span>
+                <span>Invalid Username or Password</span>
+              </div>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
         <Controller
           name="email" control={control} defaultValue=""
           render={({ field: { onChange, value }, fieldState: { invalid } }) => (
