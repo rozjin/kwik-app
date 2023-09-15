@@ -32,7 +32,11 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
       }
     }
 
-    waitForAPI();
+    try {
+      waitForAPI();
+    } catch (err) {
+      throw err;
+    }
   }, [])
 
   return (
