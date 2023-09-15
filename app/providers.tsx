@@ -1,7 +1,6 @@
 'use client'
 
 import { NextUIProvider } from '@nextui-org/react';
-import { useEffect } from 'react';
 
 const timeoutFetch = async (resource: RequestInfo | URL, options: { timeout?: number } = {}) => {
   const { timeout = 8000 } = options;
@@ -19,25 +18,22 @@ const timeoutFetch = async (resource: RequestInfo | URL, options: { timeout?: nu
 }
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
-  useEffect(() => {
-    const waitForAPI = async () => {
-      try {
-        const res = await timeoutFetch(`${process.env.NEXT_PUBLIC_API_URL}/check`);
-        if (!res.ok) {
-          throw new Error("Kwik is experiencing internal errors.");
-        }  
-      } catch (err: unknown) {
-        if (err instanceof Error) throw err;
-        throw new Error("Kwik is offline");
-      }
-    }
-
+  const waitForAPI = async () => {
     try {
-      waitForAPI();
-    } catch (err) {
-      throw err;
+      const res = await timeoutFetch(`${process.env.NEXT_PUBLIC_API_URL}/check`);
+      if (!res.ok) {
+        throw new Error("Kwik is experiencing internal errors.");
+      }  
+    } catch (err: unknown) {
+      if (err instanceof Error) throw err;
+      throw new Error("Kwik is offline");
     }
-  }, [])
+  }
+
+  waitForAPI()
+    .catch((err) => {
+      throw err;
+    })
 
   return (
     <NextUIProvider>
