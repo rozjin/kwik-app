@@ -217,32 +217,34 @@ export default () => {
           <h4 className="mt-6 text-md">Personal Information</h4>
         </div>
       </div>
-      <div className="flex flex-col gap-4 mt-4">
-        <Skeleton className="rounded-lg">
-          <div className="rounded-lg h-14 bg-default-300"></div>
-        </Skeleton>
-        <Skeleton className="rounded-lg">
-          <div className="rounded-lg h-14 bg-default-300"></div>
-        </Skeleton>
-        <Skeleton className="rounded-lg">
-          <div className="rounded-lg h-14 bg-default-300"></div>
-        </Skeleton>
+      <div className="max-w-sm">
+        <div className="flex flex-col gap-4 mt-4">
+            <Skeleton className="rounded-lg">
+              <div className="rounded-lg h-14 bg-default-300"></div>
+            </Skeleton>
+            <Skeleton className="rounded-lg">
+              <div className="rounded-lg h-14 bg-default-300"></div>
+            </Skeleton>
+            <Skeleton className="rounded-lg">
+              <div className="rounded-lg h-14 bg-default-300"></div>
+            </Skeleton>
+          </div>
+
+          <h4 className="mt-6 text-md">Address</h4>
+          <div className="flex flex-col gap-4 mt-4">
+            <Skeleton className="rounded-lg">
+              <div className="h-48 rounded-lg bg-default-300"></div>
+            </Skeleton>
+          </div>
+          <Button
+            className="w-full mt-4"
+
+            color="primary"
+            variant="flat"
+
+            disabled={true}
+          >Save</Button>
       </div>
-
-      <h4 className="mt-6 text-md">Address</h4>
-      <div className="flex flex-col gap-4 mt-4">
-        <Skeleton className="rounded-lg">
-          <div className="h-48 rounded-lg bg-default-300"></div>
-        </Skeleton>
-      </div>
-      <Button
-        className="w-full mt-4"
-
-        color="primary"
-        variant="flat"
-
-        disabled={true}
-      >Save</Button>
     </>
   )
 
@@ -254,248 +256,249 @@ export default () => {
           <h4 className="mt-6 text-md">Personal Information</h4>
         </div>
       </div>
-      <div className="flex flex-col gap-4 mt-4">
-        <Controller
-          name="user.name" control={control} defaultValue={user.data.user.name}
-          render={({ field: { onChange, value, name }, fieldState: { invalid } }) => (
-            <Input
-              isRequired
-              isClearable
-              type="text"
-              label="Name"
-              placeholder="Joe Smith"
-              description="Please enter your full legal name"
-
-              onClear={() => setValue(name, "")}
-              onChange={onChange}
-              value={value}
-
-              validationState={invalid ? "invalid" : "valid"}
-              errorMessage={invalid && "Please enter your name"}
-            />
-          )}
-        />
-
-        <Controller
-          name="user.email" control={control} defaultValue={user.data.user.email}
-          render={({ field: { onChange, value, name }, fieldState: { invalid } }) => (
-            <Input
-              isRequired
-              isClearable
-              type="email"
-              label="Email"
-              placeholder="joe@example.com"
-
-              onClear={() => setValue(name, "")}
-              onChange={onChange}
-              value={value}
-
-              validationState={invalid ? "invalid" : "valid"}
-              errorMessage={invalid && "Please enter a valid email address"}
-            />
-          )}
-        />
-
-        <Controller
-          name="user.phone_number" control={control} defaultValue={user.data.user.phone_number}
-          render={({ field: { onChange, value, name }, fieldState: { invalid } }) => (
-            <Input
-              isRequired
-              isClearable
-              type="tel"
-              label="Phone Number"
-              placeholder="0214443335"
-
-              onClear={() => setValue(name, "")}
-              onChange={onChange}
-              value={value}
-
-              validationState={invalid ? "invalid" : "valid"}
-              errorMessage={invalid && "Please enter a valid NZ phone number"}
-            />
-          )}
-        />
-      </div>
-
-      <h4 className="mt-6 text-md">Address</h4>
-      <div className="flex flex-col gap-4 mt-4">
-        <div className="flex flex-row justify-between">
+      <div className="max-w-sm">
+        <div className="flex flex-col gap-4 mt-4">
           <Controller
-            name="address.line" control={control} defaultValue={data.data.address.line}
+            name="user.name" control={control} defaultValue={user.data.user.name}
             render={({ field: { onChange, value, name }, fieldState: { invalid } }) => (
               <Input
                 isRequired
                 isClearable
-
                 type="text"
-                label="Line"
-                placeholder="123 Main Street"
+                label="Name"
+                placeholder="Joe Smith"
+                description="Please enter your full legal name"
 
-                onClear={() => {
-                  getPlacePredictions({ input: "", componentRestrictions: {
-                    country: "NZ"
-                  }})
-                  setValue(name, "")
-                }}
-
-                onChange={(e) => {
-                  getPlacePredictions({ input: e.target.value, componentRestrictions: {
-                    country: "NZ"
-                  }})
-
-                  onChange(e);
-                  placePredictions.length > 0 ? setPredictionsOpen(true) : void(0);
-                }}
+                onClear={() => setValue(name, "")}
+                onChange={onChange}
                 value={value}
-                
-                ref={refs.setReference}
-                {...getReferenceProps()}
 
                 validationState={invalid ? "invalid" : "valid"}
-                errorMessage={invalid && "Please enter the address line"}
+                errorMessage={invalid && "Please enter your name"}
               />
             )}
           />
-          {predictionsOpen &&
-            <Listbox
-              ref={refs.setFloating}
-              style={floatingStyles}
-              {...getFloatingProps()}
 
-              aria-label="Address Suggestions"
+          <Controller
+            name="user.email" control={control} defaultValue={user.data.user.email}
+            render={({ field: { onChange, value, name }, fieldState: { invalid } }) => (
+              <Input
+                isRequired
+                isClearable
+                type="email"
+                label="Email"
+                placeholder="joe@example.com"
 
-              className="z-10 rounded-lg bg-default-100"
-              items={placePredictions}
+                onClear={() => setValue(name, "")}
+                onChange={onChange}
+                value={value}
 
-              onAction={async (place_id) => {
-                const address = await fetchAddress(place_id as string);
+                validationState={invalid ? "invalid" : "valid"}
+                errorMessage={invalid && "Please enter a valid email address"}
+              />
+            )}
+          />
 
-                setValue("address", {
-                  line: address.premise + " " + address.line,
-                  region: address.region,
-                  city: address.city,
+          <Controller
+            name="user.phone_number" control={control} defaultValue={user.data.user.phone_number}
+            render={({ field: { onChange, value, name }, fieldState: { invalid } }) => (
+              <Input
+                isRequired
+                isClearable
+                type="tel"
+                label="Phone Number"
+                placeholder="0214443335"
 
-                  postcode: address.postcode
-                });
+                onClear={() => setValue(name, "")}
+                onChange={onChange}
+                value={value}
 
-                setPredictionsOpen(false)
-              }}
-            >
-              {(item) => (
-                <ListboxItem
-                  key={item.place_id}
-                  textValue={item.description}
-                  showDivider={true}
-                >
-                  {getHighlights(item.description, item.matched_substrings)
-                  .map((part, index) => (
-                    <span
-                      key={index}
-                      className={`${part.match ? "text-primary" : ""}`}
-                    >
-                      {part.text}
-                    </span>
-                  ))}
-                </ListboxItem>
+                validationState={invalid ? "invalid" : "valid"}
+                errorMessage={invalid && "Please enter a valid NZ phone number"}
+              />
+            )}
+          />
+        </div>
+        <h4 className="mt-6 text-md">Address</h4>
+        <div className="flex flex-col gap-4 mt-4">
+          <div className="flex flex-row justify-between">
+            <Controller
+              name="address.line" control={control} defaultValue={data.data.address.line}
+              render={({ field: { onChange, value, name }, fieldState: { invalid } }) => (
+                <Input
+                  isRequired
+                  isClearable
+
+                  type="text"
+                  label="Line"
+                  placeholder="123 Main Street"
+
+                  onClear={() => {
+                    getPlacePredictions({ input: "", componentRestrictions: {
+                      country: "NZ"
+                    }})
+                    setValue(name, "")
+                  }}
+
+                  onChange={(e) => {
+                    getPlacePredictions({ input: e.target.value, componentRestrictions: {
+                      country: "NZ"
+                    }})
+
+                    onChange(e);
+                    placePredictions.length > 0 ? setPredictionsOpen(true) : void(0);
+                  }}
+                  value={value}
+                  
+                  ref={refs.setReference}
+                  {...getReferenceProps()}
+
+                  validationState={invalid ? "invalid" : "valid"}
+                  errorMessage={invalid && "Please enter the address line"}
+                />
               )}
-            </Listbox>
-          }
-          <Controller
-            name="address.unit" control={control} defaultValue={data.data.address.unit}
-            render={({ field: { onChange, value, name }, fieldState: { invalid } }) => (
-              <Input
-                isClearable
-                type="text"
-                label="Unit"
-                placeholder="Unit 101"
+            />
+            {predictionsOpen &&
+              <Listbox
+                ref={refs.setFloating}
+                style={floatingStyles}
+                {...getFloatingProps()}
 
-                className="w-1/3 ml-2"
+                aria-label="Address Suggestions"
 
-                onClear={() => setValue(name, "")}
-                onChange={onChange}
-                value={value}
+                className="z-10 rounded-lg bg-default-100"
+                items={placePredictions}
 
-                validationState={invalid ? "invalid" : "valid"}
-                errorMessage={invalid && "Please a valid unit"}
-              />
-            )}
-          />
+                onAction={async (place_id) => {
+                  const address = await fetchAddress(place_id as string);
+
+                  setValue("address", {
+                    line: address.premise + " " + address.line,
+                    region: address.region,
+                    city: address.city,
+
+                    postcode: address.postcode
+                  });
+
+                  setPredictionsOpen(false)
+                }}
+              >
+                {(item) => (
+                  <ListboxItem
+                    key={item.place_id}
+                    textValue={item.description}
+                    showDivider={true}
+                  >
+                    {getHighlights(item.description, item.matched_substrings)
+                    .map((part, index) => (
+                      <span
+                        key={index}
+                        className={`${part.match ? "text-primary" : ""}`}
+                      >
+                        {part.text}
+                      </span>
+                    ))}
+                  </ListboxItem>
+                )}
+              </Listbox>
+            }
+            <Controller
+              name="address.unit" control={control} defaultValue={data.data.address.unit}
+              render={({ field: { onChange, value, name }, fieldState: { invalid } }) => (
+                <Input
+                  isClearable
+                  type="text"
+                  label="Unit"
+                  placeholder="Unit 101"
+
+                  className="w-1/3 ml-2"
+
+                  onClear={() => setValue(name, "")}
+                  onChange={onChange}
+                  value={value}
+
+                  validationState={invalid ? "invalid" : "valid"}
+                  errorMessage={invalid && "Please a valid unit"}
+                />
+              )}
+            />
+          </div>
+          <div className="flex flex-row justify-between">
+            <Controller
+              name="address.city" control={control} defaultValue={data.data.address.city}
+              render={({ field: { onChange, value, name }, fieldState: { invalid } }) => (
+                <Input
+                  isClearable
+                  type="text"
+                  label="City"
+                  placeholder="Springfield"
+
+                  className="w-1/3"
+
+                  onClear={() => setValue(name, "")}
+                  onChange={onChange}
+                  value={value}
+
+                  validationState={invalid ? "invalid" : "valid"}
+                  errorMessage={invalid && "Please a valid city"}
+                />
+              )}
+            />
+
+            <Controller
+              name="address.region" control={control} defaultValue={data.data.address.region}
+              render={({ field: { onChange, value, name }, fieldState: { invalid } }) => (
+                <Input
+                  isRequired
+                  isClearable
+                  type="text"
+                  label="Region"
+                  placeholder="Auckland"
+
+                  className="w-1/3 ml-2"
+
+                  onClear={() => setValue(name, "")}
+                  onChange={onChange}
+                  value={value}
+
+                  validationState={invalid ? "invalid" : "valid"}
+                  errorMessage={invalid && "Please a valid region"}
+                />
+              )}
+            />
+
+            <Controller
+              name="address.postcode" control={control} defaultValue={data.data.address.postcode}
+              render={({ field: { onChange, value, name }, fieldState: { invalid } }) => (
+                <Input
+                  isRequired
+                  isClearable
+                  type="text"
+                  label="Postcode"
+                  placeholder="9011"
+
+                  className="w-1/3 ml-2"
+
+                  onClear={() => setValue(name, "")}
+                  onChange={onChange}
+                  value={value}
+
+                  validationState={invalid ? "invalid" : "valid"}
+                  errorMessage={invalid && "Please a valid postcode"}
+                />
+              )}
+            />
+          </div>
         </div>
-        <div className="flex flex-row justify-between">
-          <Controller
-            name="address.city" control={control} defaultValue={data.data.address.city}
-            render={({ field: { onChange, value, name }, fieldState: { invalid } }) => (
-              <Input
-                isClearable
-                type="text"
-                label="City"
-                placeholder="Springfield"
+        <Button
+          className="w-full mt-4"
 
-                className="w-1/3"
+          color="primary"
+          variant="flat"
 
-                onClear={() => setValue(name, "")}
-                onChange={onChange}
-                value={value}
-
-                validationState={invalid ? "invalid" : "valid"}
-                errorMessage={invalid && "Please a valid city"}
-              />
-            )}
-          />
-
-          <Controller
-            name="address.region" control={control} defaultValue={data.data.address.region}
-            render={({ field: { onChange, value, name }, fieldState: { invalid } }) => (
-              <Input
-                isRequired
-                isClearable
-                type="text"
-                label="Region"
-                placeholder="Auckland"
-
-                className="w-1/3 ml-2"
-
-                onClear={() => setValue(name, "")}
-                onChange={onChange}
-                value={value}
-
-                validationState={invalid ? "invalid" : "valid"}
-                errorMessage={invalid && "Please a valid region"}
-              />
-            )}
-          />
-
-          <Controller
-            name="address.postcode" control={control} defaultValue={data.data.address.postcode}
-            render={({ field: { onChange, value, name }, fieldState: { invalid } }) => (
-              <Input
-                isRequired
-                isClearable
-                type="text"
-                label="Postcode"
-                placeholder="9011"
-
-                className="w-1/3 ml-2"
-
-                onClear={() => setValue(name, "")}
-                onChange={onChange}
-                value={value}
-
-                validationState={invalid ? "invalid" : "valid"}
-                errorMessage={invalid && "Please a valid postcode"}
-              />
-            )}
-          />
-        </div>
+          onClick={handleSubmit(onSubmit)}
+        >Save</Button>
       </div>
-      <Button
-        className="w-full mt-4"
-
-        color="primary"
-        variant="flat"
-
-        onClick={handleSubmit(onSubmit)}
-      >Save</Button>
    </>
   )
 }

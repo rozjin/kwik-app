@@ -127,20 +127,22 @@ export default () => {
           </Button>
         )}
       </div>
-      {data.data.map((card: StripeCard) => <PaymentCard card={card} key={card.expiry} />)}
-      {data.data.length == 0 && (
-        <Card className="gap-2 p-6 max-w-sm">
-          <div className="flex items-center justify-center h-32 rounded-lg">
-            <span>You have no cards setup.</span>
-          </div>
-          <Button variant="flat" color="primary" className="justify-center w-full" onPress={onSubmit}>
-            <div className="flex flex-row items-center justify-start">
-              <span>Add Card</span>
-              <span><ArrowRightIcon className="w-4 h-4" /></span>
+      <div className="flex flex-row justify-center">
+        {data.data.map((card: StripeCard) => <PaymentCard card={card} key={card.expiry} />)}
+        {data.data.length == 0 && (
+          <Card className="gap-2 p-6 max-w-sm">
+            <div className="flex items-center justify-center h-32 rounded-lg">
+              <span>You have no cards setup.</span>
             </div>
-          </Button>
-        </Card>
-      )}
+            <Button variant="flat" color="primary" className="justify-center w-full" onPress={onSubmit}>
+              <div className="flex flex-row items-center justify-start">
+                <span>Add Card</span>
+                <span><ArrowRightIcon className="w-4 h-4" /></span>
+              </div>
+            </Button>
+          </Card>
+        )}
+      </div>
     </>
   )
 }

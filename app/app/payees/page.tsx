@@ -278,7 +278,7 @@ export default () => {
 
   if (isLoading) return (
     <>
-      <div className="flex flex-row justify-between mb-6">
+      <div className="flex flex-row justify-center mb-6">
         <h1 className="text-2xl">Payees</h1>
       </div>
       <Card className="max-w-sm gap-4 p-6">
@@ -295,7 +295,7 @@ export default () => {
 
   return (
     <>
-      <div className="flex flex-row justify-between mb-6">
+      <div className="flex flex-row justify-center mb-6">
         <h1 className="text-2xl">Payees</h1>
         {data.data.payees.length != 0 && (
           <Button isIconOnly variant="flat" color="primary">
