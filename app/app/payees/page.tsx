@@ -281,15 +281,17 @@ export default () => {
       <div className="flex flex-row justify-center mb-6">
         <h1 className="text-2xl">Payees</h1>
       </div>
-      <Card className="max-w-sm gap-4 p-6">
-        <div className="flex flex-row">
-          <Skeleton className="w-32 h-32 rounded-lg bg-default-300" />
-          <div className="flex flex-col w-full ml-2">
-            <Skeleton className="w-3/5 h-10 rounded-lg bg-default-300" />
-            <Skeleton className="w-4/5 h-10 mt-2 rounded-lg bg-default-300" />
+      <div className="flex w-full flex-row justify-center items-center">
+        <Card className="max-w-sm gap-4 p-6">
+          <div className="flex flex-row">
+            <Skeleton className="w-32 h-32 rounded-lg bg-default-300" />
+            <div className="flex flex-col w-full ml-2">
+              <Skeleton className="w-3/5 h-10 rounded-lg bg-default-300" />
+              <Skeleton className="w-4/5 h-10 mt-2 rounded-lg bg-default-300" />
+            </div>
           </div>
-        </div>
-      </Card>
+        </Card>
+      </div>
     </>
   )
 

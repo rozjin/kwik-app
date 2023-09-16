@@ -210,7 +210,7 @@ export default () => {
   }
 
   if (isLoading) return (
-    <>
+    <div className="flex flex-col justify-center items-center">
       <div className="flex flex-row justify-center">
         <div className="flex flex-col">
           <h1 className="text-2xl">Hey there, just a second.</h1>
@@ -245,11 +245,11 @@ export default () => {
             disabled={true}
           >Save</Button>
       </div>
-    </>
+    </div>
   )
 
   return (
-    <div className="flex flex-row justify-center">
+    <div className="flex flex-col justify-center items-center">
       <div className="flex flex-row justify-center">
         <div className="flex flex-col">
           <h1 className="text-2xl">Hello,&nbsp;{user.data.user.name.split(' ')[0]}</h1>
