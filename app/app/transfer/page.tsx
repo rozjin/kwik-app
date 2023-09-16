@@ -124,7 +124,10 @@ export default () => {
 
   if (isLoading) return (
     <>
-      <Card className="gap-4 p-6">
+      <div className="flex flex-col items-center justify-center mb-6">
+        <h1 className="text-2xl">Transfer</h1>
+      </div>
+      <Card className="gap-4 p-6 max-w-sm">
         <Skeleton className="rounded-lg">
           <div className="h-32 rounded-lg bg-default-300"></div>
         </Skeleton>

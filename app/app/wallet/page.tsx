@@ -101,7 +101,10 @@ export default () => {
 
   if (isLoading) return (
     <>
-      <Card className="gap-4 p-6">
+      <div className="flex flex-row justify-center mb-6">
+        <h1 className="text-2xl mr-4">Wallet</h1>
+      </div>
+      <Card className="gap-4 p-6 max-w-sm">
         <Skeleton className="rounded-lg">
           <div className="h-32 rounded-lg bg-default-300"></div>
         </Skeleton>

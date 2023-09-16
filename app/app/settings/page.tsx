@@ -217,7 +217,7 @@ export default () => {
           <h4 className="mt-6 text-md">Personal Information</h4>
         </div>
       </div>
-      <div className="max-w-sm">
+      <div className="max-w-sm w-full">
         <div className="flex flex-col gap-4 mt-4">
             <Skeleton className="rounded-lg">
               <div className="rounded-lg h-14 bg-default-300"></div>
