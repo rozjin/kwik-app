@@ -303,7 +303,7 @@ export default () => {
           </Button>
         )}
       </div>
-      <div className="flex w-full gap-4">
+      <div className="flex w-full flex-row justify-center items-center">
         {data.data.payees.map((item: { name: string, email: string, picture?: string }) =>
           <Payee key={item.email} payee={item} mutate={mutate} />
         )}

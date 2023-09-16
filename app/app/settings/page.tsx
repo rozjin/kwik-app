@@ -249,7 +249,7 @@ export default () => {
   )
 
   return (
-    <>
+    <div className="flex flex-row justify-center">
       <div className="flex flex-row justify-center">
         <div className="flex flex-col">
           <h1 className="text-2xl">Hello,&nbsp;{user.data.user.name.split(' ')[0]}</h1>
@@ -499,6 +499,6 @@ export default () => {
           onClick={handleSubmit(onSubmit)}
         >Save</Button>
       </div>
-   </>
+   </div>
   )
 }
