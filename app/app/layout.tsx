@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuItem, NavbarMenu, NavbarMenuToggle, Link, Button } from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuItem, NavbarMenu, NavbarMenuToggle, Link, Button, Divider } from "@nextui-org/react";
 import { usePathname, useRouter } from 'next/navigation';
 import useUser from '@/kwik/hooks/user';
 import dynamic from 'next/dynamic';
@@ -118,6 +118,10 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           </div>
         )}
       </main>
+      <Divider orientation="horizontal" />
+      <div className="flex flex-row justify-center">
+        <p className="text-sm text-default-400">© Remod Limited, 2023</p>
+      </div>
     </>
   )
 }

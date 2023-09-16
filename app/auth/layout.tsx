@@ -1,6 +1,6 @@
 'use client'
 
-import { Navbar, NavbarBrand, NavbarContent } from "@nextui-org/react";
+import { Divider, Navbar, NavbarBrand, NavbarContent } from "@nextui-org/react";
 import { useEffect } from "react";
 import useUser from "@/kwik/hooks/user";
 import { useRouter } from "next/navigation";
@@ -32,6 +32,10 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
       <main className="container flex items-center justify-center flex-grow px-6 mx-auto max-w-7xl">
         {children}
       </main>
+      <Divider orientation="horizontal" />
+      <div className="flex flex-row justify-center">
+        <p className="text-sm text-default-400">© Remod Limited, 2023</p>
+      </div>
     </>
   )
 }
