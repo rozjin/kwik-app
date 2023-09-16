@@ -256,7 +256,7 @@ export default () => {
           <h4 className="mt-6 text-md">Personal Information</h4>
         </div>
       </div>
-      <div className="max-w-sm">
+      <div className="max-w-md">
         <div className="flex flex-col gap-4 mt-4">
           <Controller
             name="user.name" control={control} defaultValue={user.data.user.name}
