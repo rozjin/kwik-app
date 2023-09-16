@@ -92,10 +92,10 @@ const Transfers = () => {
                 }[item.status]}
               >
                 <p className="text-md">{!!item.to ? "Sent to" : "Received from"} {!!item.to ? item.to.name : item.from?.name}</p>
-                {!!item.desc ? <>
+                {!!item.desc ? <div className="flex flex-row">
                   <p className="text-md">Note: </p>
                   <p className="text-default-400">{item.desc}</p>
-                </>: ""}  
+                </div>: ""}  
               </AccordionItem>
             </Accordion>
           </TableCell>
