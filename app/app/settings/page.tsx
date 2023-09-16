@@ -211,8 +211,12 @@ export default () => {
 
   if (isLoading) return (
     <>
-      <h1 className="text-2xl">Hey there, just a second.</h1>
-      <h4 className="mt-6 text-md">Personal Information</h4>
+      <div className="flex flex-row justify-center">
+        <div className="flex flex-col">
+          <h1 className="text-2xl">Hey there, just a second.</h1>
+          <h4 className="mt-6 text-md">Personal Information</h4>
+        </div>
+      </div>
       <div className="flex flex-col gap-4 mt-4">
         <Skeleton className="rounded-lg">
           <div className="rounded-lg h-14 bg-default-300"></div>
@@ -244,8 +248,12 @@ export default () => {
 
   return (
     <>
-      <h1 className="text-2xl">Hello,&nbsp;{user.data.user.name.split(' ')[0]}</h1>
-      <h4 className="mt-6 text-md">Personal Information</h4>
+      <div className="flex flex-row justify-center">
+        <div className="flex flex-col">
+          <h1 className="text-2xl">Hello,&nbsp;{user.data.user.name.split(' ')[0]}</h1>
+          <h4 className="mt-6 text-md">Personal Information</h4>
+        </div>
+      </div>
       <div className="flex flex-col gap-4 mt-4">
         <Controller
           name="user.name" control={control} defaultValue={user.data.user.name}

@@ -59,7 +59,7 @@ const Transfers = () => {
         status: string,
         last_balance: number,
         amount: number,
-        date: Date,
+        date: string,
 
         to?: {
             email: string,
@@ -72,7 +72,7 @@ const Transfers = () => {
         }
       }) => (
         <TableRow key={item.id}>
-          <TableCell>{item.date.toLocaleDateString("en-NZ")}</TableCell>
+          <TableCell>{new Date(item.date).toLocaleDateString("en-NZ")}</TableCell>
           <TableCell>{item.to != undefined ? "-" : ""}{item.amount}</TableCell>
           <TableCell>{item.last_balance}</TableCell>
           <TableCell>{item.status}</TableCell>

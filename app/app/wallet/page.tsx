@@ -119,7 +119,7 @@ export default () => {
 
   return (
     <>
-      <div className="flex flex-row justify-between mb-6">
+      <div className="flex flex-row justify-center mb-6">
         <h1 className="text-2xl">Wallet</h1>
         {data.data.length != 0 && (
           <Button isIconOnly variant="flat" color="primary" onPress={onSubmit}>
@@ -129,7 +129,7 @@ export default () => {
       </div>
       {data.data.map((card: StripeCard) => <PaymentCard card={card} key={card.expiry} />)}
       {data.data.length == 0 && (
-        <Card className="gap-2 p-6">
+        <Card className="gap-2 p-6 max-w-sm">
           <div className="flex items-center justify-center h-32 rounded-lg">
             <span>You have no cards setup.</span>
           </div>
