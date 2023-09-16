@@ -305,7 +305,7 @@ export default () => {
           </Button>
         )}
       </div>
-      <div className="flex w-full flex-row justify-center items-center gap-4">
+      <div className="w=full gap-4 grid-cols-2 auto-rows-auto">
         {data.data.payees.map((item: { name: string, email: string, picture?: string }) =>
           <Payee key={item.email} payee={item} mutate={mutate} />
         )}
