@@ -127,19 +127,21 @@ export default () => {
       <div className="flex flex-col items-center justify-center mb-6">
         <h1 className="text-2xl">Transfer</h1>
       </div>
-      <Card className="gap-4 p-6 max-w-sm">
-        <Skeleton className="rounded-lg">
-          <div className="h-32 rounded-lg bg-default-300"></div>
-        </Skeleton>
-          <div className="flex flex-row justify-between">
-            <Skeleton className="w-2/3 rounded-lg">
-              <div className="h-10 rounded-lg bg-default-300"></div>
-            </Skeleton>
-            <Skeleton className="w-1/3 ml-2 rounded-lg">
-              <div className="h-10 rounded-lg bg-default-300"></div>
-            </Skeleton>
-          </div>
-      </Card>
+      <div className="flex flex-row justify-center">
+        <Card className="gap-4 p-6 max-w-sm">
+          <Skeleton className="rounded-lg">
+            <div className="h-32 rounded-lg bg-default-300"></div>
+          </Skeleton>
+            <div className="flex flex-row justify-between">
+              <Skeleton className="w-2/3 rounded-lg">
+                <div className="h-10 rounded-lg bg-default-300"></div>
+              </Skeleton>
+              <Skeleton className="w-1/3 ml-2 rounded-lg">
+                <div className="h-10 rounded-lg bg-default-300"></div>
+              </Skeleton>
+            </div>
+        </Card>
+      </div>
     </>
   )
 
