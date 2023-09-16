@@ -111,7 +111,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           </>
         }
       </Navbar>
-      <main className="container flex-grow px-6 mx-auto max-w-7xl">
+      <main className="container flex-grow px-6 mx-auto max-w-7xl h-full">
         {user.data.refreshToken && (
           <div>
             {children}
