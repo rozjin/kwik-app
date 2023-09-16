@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, CardHeader, CardBody, Divider, Dropdown, DropdownTrigger, Button, DropdownMenu, DropdownItem, Table, TableHeader, TableColumn, TableBody, TableRow, Skeleton, CardFooter, TableCell, Chip } from "@nextui-org/react";
+import { Card, CardHeader, CardBody, Divider, Dropdown, DropdownTrigger, Button, DropdownMenu, DropdownItem, Table, TableHeader, TableColumn, TableBody, TableRow, Skeleton, CardFooter, TableCell, Chip, Accordion, AccordionItem } from "@nextui-org/react";
 import { MenuIcon } from '@heroicons/react/outline';
 import { ArrowRightIcon } from '@heroicons/react/solid';
 import { default as useUser } from '@/kwik/hooks/user';
@@ -61,6 +61,8 @@ const Transfers = () => {
         amount: number,
         date: string,
 
+        desc?: string,
+
         to?: {
             email: string,
             name: string
@@ -73,14 +75,30 @@ const Transfers = () => {
       }) => (
         <TableRow key={item.id}>
           <TableCell>{new Date(item.date).toLocaleDateString("en-NZ")}</TableCell>
-          <TableCell>{item.to != undefined ? "-" : ""}{item.amount}</TableCell>
+          <TableCell>{!!item.to ? "-" : ""}{item.amount}</TableCell>
           <TableCell>{item.last_balance}</TableCell>
-          <TableCell>{{
-            "INIT": <Chip variant="flat" color="primary">Initiated</Chip>,
-            "CHARGING": <Chip variant="flat" color="warning">Charging</Chip>,
-            "SUCCESS": <Chip variant="flat" color="success">Finished</Chip>,
-            "FAILED": <Chip variant="flat" color="danger">Failed</Chip>
-          }[item.status]}</TableCell>
+          <TableCell>
+            <Accordion>
+              <AccordionItem 
+                key="1" 
+                aria-label={`Transaction on ${new Date(item.date).toLocaleDateString("en-NZ")}`}
+                hideIndicator
+                isCompact
+                title={{
+                  "INIT": <Chip variant="flat" color="primary">Initiated</Chip>,
+                  "CHARGING": <Chip variant="flat" color="warning">Charging</Chip>,
+                  "SUCCESS": <Chip variant="flat" color="success">Finished</Chip>,
+                  "FAILED": <Chip variant="flat" color="danger">Failed</Chip>
+                }[item.status]}
+              >
+                <p className="text-md">{!!item.to ? "Sent to" : "Received from"} {!!item.to ? item.to.name : item.from?.name}</p>
+                {!!item.desc ? <>
+                  <p className="text-md">Note: </p>
+                  <p className="text-default-400">{item.desc}</p>
+                </>: ""}  
+              </AccordionItem>
+            </Accordion>
+          </TableCell>
         </TableRow>
       )}
       </TableBody>
