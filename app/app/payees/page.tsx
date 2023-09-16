@@ -298,14 +298,14 @@ export default () => {
   return (
     <>
       <div className="flex flex-row justify-center mb-6">
-        <h1 className="text-2xl">Payees</h1>
+        <h1 className="text-2xl mr-4">Payees</h1>
         {data.data.payees.length != 0 && (
           <Button isIconOnly variant="flat" color="primary">
             <PlusIcon className="w-4 h-4" />
           </Button>
         )}
       </div>
-      <div className="flex w-full flex-row justify-center items-center">
+      <div className="flex w-full flex-row justify-center items-center gap-4">
         {data.data.payees.map((item: { name: string, email: string, picture?: string }) =>
           <Payee key={item.email} payee={item} mutate={mutate} />
         )}

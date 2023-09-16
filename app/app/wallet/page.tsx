@@ -120,7 +120,7 @@ export default () => {
   return (
     <>
       <div className="flex flex-row justify-center mb-6">
-        <h1 className="text-2xl">Wallet</h1>
+        <h1 className="text-2xl mr-4">Wallet</h1>
         {data.data.length != 0 && (
           <Button isIconOnly variant="flat" color="primary" onPress={onSubmit}>
             <PlusIcon className="w-4 h-4" />
