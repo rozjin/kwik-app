@@ -8,6 +8,81 @@ import fetcher, { FetchError } from "@/kwik/app/fetcher";
 import useSWR from 'swr';
 import Link from "next/link";
 
+const Transfers = () => {
+  const user = useUser();
+  const { data, isLoading, error } = useSWR(['/api/transfer', {
+    headers: {
+      'Authorization': `Bearer ${user.data.token}`
+    }
+  }], ([input, init]) => fetcher(input, init), {
+    onErrorRetry: async(err, key, config, revalidate, { retryCount }) => {
+      if (err instanceof FetchError && err.status == 401) {
+        await user.refresh();
+
+        revalidate({ retryCount });
+      }
+    },
+  });
+
+  if (isLoading) return (
+    <Table aria-label="Transactions table" className="mt-4">
+      <TableHeader>
+        <TableColumn>Date</TableColumn>
+        <TableColumn>Amount</TableColumn>
+        <TableColumn>Balance</TableColumn>
+        <TableColumn>Status</TableColumn>
+      </TableHeader>
+      <TableBody emptyContent={
+          <Skeleton className="rounded-lg">
+            <div className="rounded-lg h-36 bg-default-300"></div>
+          </Skeleton>
+        }
+      >
+      </TableBody>
+    </Table>
+  )
+
+  return (
+    <Table aria-label="Transactions table" className="mt-4">
+      <TableHeader>
+        <TableColumn>Date</TableColumn>
+        <TableColumn>Amount</TableColumn>
+        <TableColumn>Balance</TableColumn>
+        <TableColumn>Status</TableColumn>
+      </TableHeader>
+      <TableBody 
+        emptyContent={"No transactions to display"} 
+        items={data.data.transfers}
+      >{(item: {
+        id: number,
+
+        status: string,
+        last_balance: number,
+        amount: number,
+        date: Date,
+
+        to?: {
+            email: string,
+            name: string
+        },
+
+        from?: {
+            email: string,
+            name: string
+        }
+      }) => (
+        <TableRow key={item.id}>
+          <TableCell>{item.date.toLocaleDateString("en-NZ")}</TableCell>
+          <TableCell>{item.to != undefined ? "-" : ""}{item.amount}</TableCell>
+          <TableCell>{item.last_balance}</TableCell>
+          <TableCell>{item.status}</TableCell>
+        </TableRow>
+      )}
+      </TableBody>
+    </Table>
+  )
+}
+
 export default () => {
   const user = useUser();
   const { data, isLoading, error } = useSWR(['/api/money', {
@@ -37,21 +112,7 @@ export default () => {
           <div className="h-10 rounded-lg bg-default-300"></div>
         </Skeleton>
       </Card>
-      <Table aria-label="Transactions table" className="mt-4">
-        <TableHeader>
-          <TableColumn>Date</TableColumn>
-          <TableColumn>Amount</TableColumn>
-          <TableColumn>Balance</TableColumn>
-          <TableColumn>Status</TableColumn>
-        </TableHeader>
-        <TableBody emptyContent={
-            <Skeleton className="rounded-lg">
-              <div className="rounded-lg h-36 bg-default-300"></div>
-            </Skeleton>
-          }
-        >
-        </TableBody>
-      </Table>
+      <Transfers />
     </>
   )
 
