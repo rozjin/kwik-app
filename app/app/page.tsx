@@ -173,15 +173,7 @@ export default () => {
     date DateTime @default(now())
 
         */ }
-      <Table aria-label="Transactions table" className="mt-4">
-        <TableHeader>
-          <TableColumn>Date</TableColumn>
-          <TableColumn>Amount</TableColumn>
-          <TableColumn>Balance</TableColumn>
-          <TableColumn>Status</TableColumn>
-        </TableHeader>
-        <TableBody emptyContent={"No transactions to display"}>{[]}</TableBody>
-      </Table>
+      <Transfers />
     </>
   )
 }
