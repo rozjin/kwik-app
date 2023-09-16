@@ -32,7 +32,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
       <main className="container flex items-center justify-center flex-grow px-6 mx-auto max-w-7xl">
         {children}
       </main>
-      <Divider orientation="horizontal" />
+      <Divider orientation="horizontal" className="mt-auto mb-2" />
       <div className="flex flex-row justify-center">
         <p className="text-sm text-default-400">© Remod Limited, 2023</p>
       </div>
