@@ -64,7 +64,7 @@ const EmptyPayee = (props: { mutate: KeyedMutator<any> }) => {
   }
 
   return (
-    <Card className="max-w-sm gap-2 p-6">
+    <Card className="max-w-sm gap-2 p-6 m-4">
       <div className="flex flex-col justify-between w-full h-full">
         <div className="flex flex-col justify-between">
           <Controller
@@ -176,7 +176,7 @@ const Payee = (props: { payee: { name: string, email: string, picture?: string }
   const [deleteOpen, setDeleteOpen] = useState(false);
 
   return (
-    <Card className="max-w-sm p-6">
+    <Card className="max-w-sm p-6 m-4">
       <Modal isOpen={deleteOpen} isDismissable onClose={() => setDeleteOpen(false)}>
         <ModalContent>
           <ModalBody className="p-6">
@@ -305,7 +305,7 @@ export default () => {
           </Button>
         )}
       </div>
-      <div className="w=full gap-4 grid-cols-2 auto-rows-auto">
+      <div className="w=full grid-cols-2 auto-rows-auto">
         {data.data.payees.map((item: { name: string, email: string, picture?: string }) =>
           <Payee key={item.email} payee={item} mutate={mutate} />
         )}
