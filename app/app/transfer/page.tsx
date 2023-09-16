@@ -128,7 +128,7 @@ export default () => {
         <h1 className="text-2xl">Transfer</h1>
       </div>
       <div className="flex flex-row justify-center">
-        <Card className="gap-4 p-6 max-w-sm">
+        <Card className="gap-4 p-6 max-w-sm w-full">
           <Skeleton className="rounded-lg">
             <div className="h-32 rounded-lg bg-default-300"></div>
           </Skeleton>

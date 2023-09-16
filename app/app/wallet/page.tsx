@@ -105,7 +105,7 @@ export default () => {
         <h1 className="text-2xl mr-4">Wallet</h1>
       </div>
       <div className="flex-row flex justify-center">
-        <Card className="gap-4 p-6 max-w-sm">
+        <Card className="gap-4 p-6 max-w-sm w-full">
           <Skeleton className="rounded-lg">
             <div className="h-32 rounded-lg bg-default-300"></div>
           </Skeleton>

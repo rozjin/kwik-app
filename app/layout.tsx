@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Providers from "@/kwik/providers";
 import "@/kwik/styles/globals.css";
+import { Divider } from '@nextui-org/react';
 
 export const metadata: Metadata = {
   title: 'Kwik',
@@ -17,6 +18,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <Providers>
           {children}
         </Providers>
+        <Divider orientation="horizontal" />
+        <div className="flex flex-row justify-center">
+          <p className="text-sm text-default-400">© Remod Limited, 2023</p>
+        </div>
       </body>
     </html>
   )
