@@ -2,6 +2,7 @@
 
 import { RefreshIcon } from "@heroicons/react/outline"
 import { Button, Card, Divider } from "@nextui-org/react"
+import { randomUUID } from "crypto"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 
@@ -25,7 +26,7 @@ export default ({error, reset}: {error: Error, reset: () => void}) => {
         {error.message && <p className="mt-4">Message: {error.message}</p>}
 
         <Divider orientation="horizontal" className="my-2" />
-        <span className="text-sm text-default-400">If you seek support, please mention this ID: {error.message}</span>
+        <span className="text-sm text-default-400">If you seek support, please mention this ID: {randomUUID().toString()}</span>
       </Card>
     </main>
   )
