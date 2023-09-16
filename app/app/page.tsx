@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, CardHeader, CardBody, Divider, Dropdown, DropdownTrigger, Button, DropdownMenu, DropdownItem, Table, TableHeader, TableColumn, TableBody, TableRow, Skeleton, CardFooter, TableCell } from "@nextui-org/react";
+import { Card, CardHeader, CardBody, Divider, Dropdown, DropdownTrigger, Button, DropdownMenu, DropdownItem, Table, TableHeader, TableColumn, TableBody, TableRow, Skeleton, CardFooter, TableCell, Chip } from "@nextui-org/react";
 import { MenuIcon } from '@heroicons/react/outline';
 import { ArrowRightIcon } from '@heroicons/react/solid';
 import { default as useUser } from '@/kwik/hooks/user';
@@ -75,7 +75,12 @@ const Transfers = () => {
           <TableCell>{new Date(item.date).toLocaleDateString("en-NZ")}</TableCell>
           <TableCell>{item.to != undefined ? "-" : ""}{item.amount}</TableCell>
           <TableCell>{item.last_balance}</TableCell>
-          <TableCell>{item.status}</TableCell>
+          <TableCell>{{
+            "INIT": <Chip variant="flat" color="primary">Initiated</Chip>,
+            "CHARGING": <Chip variant="flat" color="warning">Charging</Chip>,
+            "SUCCESS": <Chip variant="flat" color="success">Finished</Chip>,
+            "FAILED": <Chip variant="flat" color="danger">Failed</Chip>
+          }[item.status]}</TableCell>
         </TableRow>
       )}
       </TableBody>
