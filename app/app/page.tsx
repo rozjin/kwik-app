@@ -75,7 +75,7 @@ const Transfers = () => {
       }) => (
         <TableRow key={item.id}>
           <TableCell>{new Date(item.date).toLocaleDateString("en-NZ")}</TableCell>
-          <TableCell>{!!item.to ? "-" : ""}{item.amount}</TableCell>
+          <TableCell className={`${!!item.to ? "text-danger" : "text-success"}`}>{!!item.to ? "-" : ""}{item.amount}</TableCell>
           <TableCell>{item.last_balance}</TableCell>
           <TableCell>
             <Accordion>
