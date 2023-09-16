@@ -118,8 +118,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           </div>
         )}
       </main>
-      <Divider orientation="horizontal" className="mt-auto mb-2" />
-      <div className="flex flex-row justify-center">
+      <div className="flex flex-row justify-center mt-auto">
         <p className="text-sm text-default-400">© Remod Limited, 2023</p>
       </div>
     </>
