@@ -1,3 +1,5 @@
+'use client'
+
 import type { Metadata } from 'next';
 import Providers from "@/kwik/providers";
 import "@/kwik/styles/globals.css";
